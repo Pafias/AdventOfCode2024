@@ -7,8 +7,7 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
-        List<String> lines = Files.readAllLines(Path.of(Main.class.getResource("/input.txt").toURI()));
+    public static int part1(List<String> lines) {
         List<String> list1 = new ArrayList<>();
         List<String> list2 = new ArrayList<>();
         lines.forEach(line -> {
@@ -25,7 +24,32 @@ public class Main {
             int distance = Math.abs(n2 - n1);
             total += distance;
         }
-        System.out.println(total);
+        return total;
+    }
+
+    public static int part2(List<String> lines) {
+        List<String> list1 = new ArrayList<>();
+        List<String> list2 = new ArrayList<>();
+        lines.forEach(line -> {
+            String[] split = line.split("   ");
+            list1.add(split[0].trim());
+            list2.add(split[1].trim());
+        });
+        List<String> sortedList1 = list1.stream().sorted().toList();
+        List<String> sortedList2 = list2.stream().sorted().toList();
+        int similarityScore = 0;
+        for (String n1 : sortedList1) {
+            int occurrencesInList2 = 0;
+            occurrencesInList2 = (int) sortedList2.stream()
+                    .filter(n2 -> n2.equals(n1))
+                    .count();
+            similarityScore += Integer.parseInt(n1) * occurrencesInList2;
+        }
+        return similarityScore;
+    }
+
+    public static List<String> readFileLines(String file) throws Exception {
+        return Files.readAllLines(Path.of(Main.class.getResource(file).toURI()));
     }
 
 }
