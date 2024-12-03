@@ -22,6 +22,14 @@ public class Main {
             }
         }
 
+        return getResult(muls);
+    }
+
+    private static int mul(int a, int b) {
+        return a * b;
+    }
+
+    private static int getResult(List<String> muls) {
         int sum = 0;
 
         for (String mul : muls) {
@@ -40,12 +48,28 @@ public class Main {
         return sum;
     }
 
-    private static int mul(int a, int b) {
-        return a * b;
-    }
-
     public static int part2(String corruptedMemoryString) {
-        return -1;
+        List<String> muls = new ArrayList<>();
+        boolean enabled = true;
+        for (int i = 0; i < corruptedMemoryString.length(); i++) {
+            try {
+                String doChunk = corruptedMemoryString.substring(i, i + 8); // "don't()" is 7 characters long and longer than "do()"
+                if(doChunk.contains("don't()")){
+                    enabled = false;
+                } else if(doChunk.contains("do()")) {
+                    enabled = true;
+                }
+
+                int nextClosingBracket = corruptedMemoryString.indexOf(")", i);
+                String chunk = corruptedMemoryString.substring(i, nextClosingBracket + 1);
+                if (enabled && chunk.matches("mul\\(\\d+,\\d+\\)")) // RegEx 😎
+                    muls.add(chunk);
+            } catch (StringIndexOutOfBoundsException ex) {
+                break;
+            }
+        }
+
+        return getResult(muls);
     }
 
     public static String readFileLines(String file) throws Exception {
