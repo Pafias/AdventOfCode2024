@@ -18,12 +18,12 @@ class MainTest {
 
     @Test
     void part2Example() throws Exception {
-        assertEquals(0, Main.part2(Main.readFileLines("/example.txt")));
+        assertEquals(6, Main.part2(Main.readFileLines("/example.txt")));
     }
 
     @Test
     void part2() throws Exception {
-        assertEquals(0, Main.part2(Main.readFileLines("/input.txt")));
+        assertEquals(1686, Main.part2(Main.readFileLines("/input.txt")));
     }
 
 }
