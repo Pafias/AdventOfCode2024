@@ -78,7 +78,20 @@ public class Main {
     }
 
     public static int part2(List<String> lines) {
-        return -1;
+
+        Grid grid = new Grid(lines);
+
+        int occurrences = 0;
+
+        for (Square square : grid.getSquares()) {
+            if (square.isX_MAS()) {
+                occurrences++;
+            }
+        }
+
+        System.out.println("Total X-MAS square occurences: " + occurrences);
+
+        return occurrences;
     }
 
     public static List<String> readFileLines(String file) throws Exception {

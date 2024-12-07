@@ -13,12 +13,52 @@ public class Grid {
         MAX_LINE_SIZE = lines.getFirst().length();
     }
 
+    public List<Square> getSquares() {
+        List<Square> squares = new ArrayList<>();
+        for (int i = 0; i < lines.size(); i++) {
+            squares.addAll(get3x3Squares(i));
+        }
+        return squares;
+    }
+
+    public List<Square> get3x3Squares(int row) {
+        List<Square> squares = new ArrayList<>();
+        for (int i = 0; i < MAX_LINE_SIZE; i++) {
+            if (i + 3 > MAX_LINE_SIZE) {
+                break;
+            }
+            String line1 = getRow(row);
+            String line2 = getRow(row + 1);
+            if (line2 == null)
+                break;
+            String line3 = getRow(row + 2);
+            if (line3 == null)
+                break;
+            squares.add(new Square(
+                    line1.charAt(i),
+                    line1.charAt(i + 1),
+                    line1.charAt(i + 2),
+                    line2.charAt(i),
+                    line2.charAt(i + 1),
+                    line2.charAt(i + 2),
+                    line3.charAt(i),
+                    line3.charAt(i + 1),
+                    line3.charAt(i + 2)
+            ));
+        }
+        return squares;
+    }
+
     public List<String> getRows() {
         return lines;
     }
 
     public String getRow(int row) {
-        return lines.get(row);
+        try {
+            return lines.get(row);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 
     public List<String> getColumns() {

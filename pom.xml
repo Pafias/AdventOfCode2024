@@ -20,6 +20,8 @@
         <module>day2</module>
         <module>day3</module>
         <module>day4</module>
+        <module>day5</module>
+        <module>day6</module>
     </modules>
 
     <dependencies>
@@ -28,6 +30,12 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.11.3</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
         </dependency>
     </dependencies>
 
